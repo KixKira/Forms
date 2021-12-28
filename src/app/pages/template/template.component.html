@@ -1,0 +1,59 @@
+<h4>Templates <small> Forms </small></h4>
+<hr>
+<form autocomplete="off" (ngSubmit)="save(form)" #form="ngForm">
+    <div>
+        <div class="mb-3 row">
+            <label class="col-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="text" placeholder="Name" [ngModel]="user.name" name="name" required minlength="3" [class.is-invalid]="name.invalid && name.touched" #name="ngModel">
+                <small class="form-text text-danger" *ngIf="name.invalid && name.touched">Please enter a minimum of 3 letters</small>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label class="col-2 col-form-label">Surname</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="text" placeholder="Surname" [ngModel]="user.surname" name="surname" ngModel required minlength="5" [class.is-invalid]="surname.invalid && surname.touched" #surname="ngModel">
+                <small class="form-text text-danger" *ngIf="surname.invalid && surname.touched">Please enter a minimum of 5 letters</small>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="email" placeholder="Email Address" [ngModel]="user.email" name="email" ngModel required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [class.is-invalid]="email.invalid && email.touched" #email="ngModel">
+            <small class="form-text text-danger" *ngIf="email.invalid && email.touched">Enter a valid email</small>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-2 col-form-label">Select Country</label>
+        <div class="col-sm-10">
+            <select class="form-select" name="country" [ngModel]="user.country" required [disabled]="countries.length === 0" [class.is-invalid]="country.invalid && country.touched" #country="ngModel">
+                <option *ngFor="let country of countries" [value]="country.code">
+                    {{country.name}}
+                </option>
+            </select>
+            <small class="form-text text-danger" *ngIf="country.invalid && country.touched">Please select your country</small>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-2 col-form-label">Gender</label>
+        <div class="col-sm-10">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" value="M" [class.is-invalid]="gender.invalid && gender.touched" required ngModel #gender="ngModel">
+                <label class="form-check-label">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" value="F" [class.is-invalid]="gender.invalid && gender.touched" required ngModel #gender="ngModel">
+                <label class="form-check-label">Female</label>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-2 col-form-label">&nbsp;</label>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-outline-primary">
+        Save
+      </button>
+        </div>
+    </div>
+</form>
